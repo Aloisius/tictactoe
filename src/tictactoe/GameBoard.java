@@ -3,6 +3,9 @@
  */
 package tictactoe;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * Representation of the game board
  *
@@ -10,9 +13,9 @@ package tictactoe;
 public class GameBoard {
 	private char[] state;
 	
-	public final char CROSS = 'X';
-	public final char NAUGHT = 'O';
-	public final char UNPLAYED = ' ';
+	public static final char CROSS = 'X';
+	public static final char NAUGHT = 'O';
+	public static final char UNPLAYED = ' ';
 	
 	
 	public GameBoard() {
@@ -23,8 +26,22 @@ public class GameBoard {
 		this.state = state.toCharArray();
 	}
 	
+	// Is the game in progress?
+	public boolean inProgress() {
+		if (won()) {
+			return false;
+		}
+
+		for (int i = 0; i < state.length; i++) {
+			if (state[i] == UNPLAYED) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	// Is the game won?
-	public boolean won() {		
+	public boolean won() {
 		int[][] winningMoves = new int[][] {
 			{0, 1, 2},
 			{3, 4, 5},
@@ -46,6 +63,46 @@ public class GameBoard {
 			}
 		}
 		return false;
+	}
+	
+	// are there any spaces available?
+	public boolean isAvailableMoves() {
+		for (int i = 0; i < state.length; i++) {
+			if (state[i] == UNPLAYED) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	// Check to see if a particular move is available (zero-indexed)
+	public boolean available(int move) {
+		if (move < 0 || move > 8) {
+			return false;
+		}
+		
+		return state[move] == UNPLAYED;
+	}
+	
+	// Set a move to player mark
+	public void set(int move, char mark) {
+		if (move < 0 || move > 8) {
+			return; // fixme: throw exception
+		}
+		
+		state[move] = mark;
+	}
+		
+	// Returns an array of valid moves
+	public Collection<Integer> availableMoves() {
+		ArrayList<Integer> moves = new ArrayList<Integer>();
+		for (int i = 0; i < state.length; i++) {
+			if (state[i] == UNPLAYED) {
+				moves.add(i);
+			}
+		}
+		
+		return moves;
 	}
 	
 	public String toString () {

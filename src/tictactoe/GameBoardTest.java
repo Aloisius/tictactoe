@@ -22,4 +22,9 @@ public class GameBoardTest {
 		assertFalse(new GameBoard("         ").won());
 	}
 
+	@Test
+	public void testInProgress() {;
+		assertFalse(new GameBoard("XX XOOOOX").inProgress());
+		assertTrue(new GameBoard("         ").inProgress());
+	}
 }
