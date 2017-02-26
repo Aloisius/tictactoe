@@ -36,4 +36,25 @@ public class InteractivePlayer extends Player {
 	        }
 	    }
 	}
+
+	@Override
+	public int getMove(GameBoard board) throws Exception {
+		Scanner input = new Scanner(System.in);
+		
+	    while (true) {
+		    System.out.print("Enter which position you want to check (1-9): ");
+	        int move = input.nextInt() - 1;   
+	        
+	        if (move < 0 || move > 8) {
+	        	System.out.println(move);
+	        	System.out.println("You must pick a space between 1 and 9\n");
+	        	continue;
+	        } else if (!board.available(move)) {
+	        	System.out.println("That space isn't available, choose another\n");
+	        	continue;
+	        }
+	        
+	       	return move;
+	    }
+	}
 }

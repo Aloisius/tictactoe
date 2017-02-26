@@ -16,12 +16,12 @@ public class RandomPlayer extends Player {
 		super(mark);
 	}
 	
+
 	@Override
-	public void playMove(GameBoard board) throws Exception {
+	public int getMove(GameBoard board) throws Exception {
 		Collection<Integer> availableMoves = board.availableMoves();
 
 		Optional<Integer> move = availableMoves.stream().skip((long)(availableMoves.size() * Math.random())).findFirst();
-
-		board.set(move.get(), mark);
+		return move.get();
 	}
 }

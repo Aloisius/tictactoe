@@ -14,5 +14,13 @@ public abstract class Player {
 		this.mark = mark;
 	}
 	
-	public abstract void playMove(GameBoard board) throws Exception;
+	public abstract int getMove(GameBoard board) throws Exception;
+	
+	public void playMove(GameBoard board) throws Exception {
+		board.set(getMove(board), mark);
+	}
+	
+	public char getMark() {
+		return mark;
+	}
 }

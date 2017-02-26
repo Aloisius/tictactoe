@@ -16,8 +16,9 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		GameBoard board = new GameBoard();
 		Player player = new InteractivePlayer(GameBoard.CROSS);
-		//RandomPlayer opponent = new RandomPlayer(GameBoard.NAUGHT);
-		Player opponent = new NegaMaxPlayer(GameBoard.NAUGHT);
+		//Player opponent = new RandomPlayer(GameBoard.NAUGHT);
+		//Player opponent = new NegaMaxPlayer(GameBoard.NAUGHT);
+		Player opponent = new PrecomputedPlayer(GameBoard.NAUGHT);
 
 		while (board.isAvailableMoves()) {
 	        System.out.println("\n" + board);

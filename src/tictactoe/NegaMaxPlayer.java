@@ -51,9 +51,9 @@ public class NegaMaxPlayer extends Player {
 	}
 	
 	@Override
-	public void playMove(GameBoard board) throws Exception {
+	public int getMove(GameBoard board) throws Exception {
 		Entry<Integer, Integer> bestMove = negamax(board, -1);
-		board.set(bestMove.getValue(), mark);
+		return bestMove.getValue();
 	}
 	
     public Map.Entry<Integer, Integer> negamax(GameBoard board, int color) {
