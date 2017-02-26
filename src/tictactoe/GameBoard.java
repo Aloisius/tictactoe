@@ -17,17 +17,36 @@ public class GameBoard {
 	public static final char NAUGHT = 'O';
 	public static final char UNPLAYED = ' ';
 	
+	private int[][] winningMoves;	
 	
 	public GameBoard() {
+		init();
 		state = "         ".toCharArray();
 	}
 	
 	public GameBoard(String state) {
+		init();
 		this.state = state.toCharArray();
 	}
 	
 	public GameBoard(GameBoard board) {
+		init();
 		this.state = board.getState().clone();
+	}
+	
+	private void init() {
+		winningMoves = new int[][] {
+			{0, 1, 2},
+			{3, 4, 5},
+			{6, 7, 8},
+			
+			{0, 3, 6},
+			{1, 4, 7},
+			{2, 5, 8},
+
+			{0, 4, 8},
+			{2, 4, 6}			
+		};
 	}
 
 	
@@ -46,20 +65,7 @@ public class GameBoard {
 	}
 	
 	// Is the game won?
-	public boolean won() {
-		int[][] winningMoves = new int[][] {
-			{0, 1, 2},
-			{3, 4, 5},
-			{6, 7, 8},
-			
-			{0, 3, 6},
-			{1, 4, 7},
-			{2, 5, 8},
-
-			{0, 4, 8},
-			{2, 4, 6}			
-		};
-		
+	public boolean won() {		
 		for (int i = 0; i < winningMoves.length; i++) {
 			if (state[winningMoves[i][0]] != UNPLAYED && 
 					state[winningMoves[i][0]] == state[winningMoves[i][1]] && 
@@ -116,20 +122,7 @@ public class GameBoard {
 	}
 	
 	// Did this player win?
-	public boolean winner(char player) {
-		int[][] winningMoves = new int[][] {
-			{0, 1, 2},
-			{3, 4, 5},
-			{6, 7, 8},
-			
-			{0, 3, 6},
-			{1, 4, 7},
-			{2, 5, 8},
-
-			{0, 4, 8},
-			{2, 4, 6}			
-		};
-		
+	public boolean winner(char player) {		
 		for (int i = 0; i < winningMoves.length; i++) {
 			if (state[winningMoves[i][0]] == player && 
 					state[winningMoves[i][0]] == state[winningMoves[i][1]] && 

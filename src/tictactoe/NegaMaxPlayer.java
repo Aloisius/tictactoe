@@ -4,7 +4,6 @@
 package tictactoe;
 
 import java.util.AbstractMap;
-import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -42,6 +41,7 @@ public class NegaMaxPlayer extends Player {
 		}
 	}
 	
+	// Simply switches between player and opponent marks based on "color"
 	private char getColorMark(int color) {
 		if (color == -1) {
 			return mark;
