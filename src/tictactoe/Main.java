@@ -12,11 +12,13 @@ public class Main {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	
+	public static void main(String[] args) throws Exception {
 		GameBoard board = new GameBoard();
-		InteractivePlayer player = new InteractivePlayer(GameBoard.CROSS);
-		RandomPlayer opponent = new RandomPlayer(GameBoard.NAUGHT);
-		
+		Player player = new InteractivePlayer(GameBoard.CROSS);
+		//RandomPlayer opponent = new RandomPlayer(GameBoard.NAUGHT);
+		Player opponent = new NegaMaxPlayer(GameBoard.NAUGHT);
+
 		while (board.isAvailableMoves()) {
 	        System.out.println("\n" + board);
 
@@ -30,11 +32,8 @@ public class Main {
 				break;
 			}
 			
-			try { 
-				opponent.playMove(board);
-			} catch (Exception e) {
-				break;
-			}
+			opponent.playMove(board);
+			System.out.println(board);
 
 			if (board.won()) {
 				System.out.println("You lose");
@@ -46,6 +45,7 @@ public class Main {
 			
 			System.out.println(board.toString());
 		}
+		
 	}
 
 }

@@ -26,6 +26,11 @@ public class GameBoard {
 		this.state = state.toCharArray();
 	}
 	
+	public GameBoard(GameBoard board) {
+		this.state = board.getState().clone();
+	}
+
+	
 	// Is the game in progress?
 	public boolean inProgress() {
 		if (won()) {
@@ -103,6 +108,45 @@ public class GameBoard {
 		}
 		
 		return moves;
+	}
+	
+	// Get the internal board state
+	public char[] getState() {
+		return state;
+	}
+	
+	// Did this player win?
+	public boolean winner(char player) {
+		int[][] winningMoves = new int[][] {
+			{0, 1, 2},
+			{3, 4, 5},
+			{6, 7, 8},
+			
+			{0, 3, 6},
+			{1, 4, 7},
+			{2, 5, 8},
+
+			{0, 4, 8},
+			{2, 4, 6}			
+		};
+		
+		for (int i = 0; i < winningMoves.length; i++) {
+			if (state[winningMoves[i][0]] == player && 
+					state[winningMoves[i][0]] == state[winningMoves[i][1]] && 
+							state[winningMoves[i][0]] == state[winningMoves[i][2]]) {
+				return true;
+			}
+		}
+		return false;		
+	}
+	
+	// Did this player lose?
+	public boolean loser(char player) {
+		if (won() && !winner(player)) {
+			return true;
+		}
+
+		return false;
 	}
 	
 	public String toString () {
